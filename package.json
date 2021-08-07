@@ -1,0 +1,35 @@
+{
+  "name": "github-review-point-counter",
+  "version": "0.0.1",
+  "description": "Github review point counter webhook and stats generator\"",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "NODE_ENV=test mocha tests --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arsfiqball/github-review-point-counter.git"
+  },
+  "keywords": [
+    "github",
+    "bot",
+    "tools"
+  ],
+  "author": "Iqbal Mohammad Abdul Ghoni <iqballmags@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Arsfiqball/github-review-point-counter/issues"
+  },
+  "homepage": "https://github.com/Arsfiqball/github-review-point-counter#readme",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "mocha": "^9.0.3"
+  },
+  "dependencies": {
+    "@koa/router": "^10.1.0",
+    "dotenv": "^10.0.0",
+    "koa": "^2.13.1"
+  }
+}
