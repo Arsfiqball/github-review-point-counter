@@ -13,7 +13,7 @@ exports.start = async function (config) {
   const db = mongoClient.db(config.mongoDatabase)
   app.context.database = db
 
-  router.post('/webhook', async ctx => {
+  async function handleIssueComment (ctx) {
     const { action, issue, comment, repository } = ctx.request.body
     const { id: issueUserId } = issue.user
     const { id: commentUserId, login: commentUserLogin } = comment.user
@@ -37,7 +37,49 @@ exports.start = async function (config) {
 
     ctx.status = 200
     ctx.body = 'SUCCESS'
-  })
+  }
+
+  async function handlePullRequestReview (ctx) {
+    const { action, review, pull_request: pullRequest, repository } = ctx.request.body
+    const { id: pullRequestUserId } = pullRequest.user
+    const { id: reviewUserId, login: reviewUserLogin } = review.user
+    const { name: repoName, full_name: repoFullname } = repository
+
+    if (action !== 'submitted' || reviewUserId === pullRequestUserId) {
+      ctx.status = 200
+      ctx.body = 'NO_ACTION'
+      return
+    }
+
+    await ctx
+      .database
+      .collection('ReviewPoints')
+      .insertOne({
+        userId: reviewUserId,
+        userLogin: reviewUserLogin,
+        repoName,
+        repoFullname
+      })
+
+    ctx.status = 200
+    ctx.body = 'SUCCESS'
+  }
+
+  router.post('/webhook', async ctx => {
+    const { issue, comment, review, pull_request: pullRequest } = ctx.request.body
+
+    if (issue && comment) {
+      return handleIssueComment(ctx)
+    }
+
+    if (review && pullRequest) {
+      return handlePullRequestReview(ctx)
+    }
+
+    ctx.status = 200
+    ctx.body = 'NO_ACTION'
+    return
+})
 
   app.use(bodyParser())
   app.use(router.routes())
