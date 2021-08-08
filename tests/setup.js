@@ -15,7 +15,6 @@ exports.setup = function () {
   })
 
   after(async function () {
-    await state.mongoDatabase.dropCollection('ReviewPoints')
     await state.mongoDatabase.dropDatabase()
     await state.mongoClient.close()
   })

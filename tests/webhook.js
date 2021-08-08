@@ -10,7 +10,7 @@ const USER_LOGIN = 'whoever'
 const OTHER_USER_ID = 5678
 
 describe('POST /webhook', function () {
-  setup();
+  setup()
 
   it('should response NO_ACTION on issue_comment with same comment and issue author', async function () {
     const payload = Object.assign({}, require('./webhook-payload-examples/issue_comment.json'))

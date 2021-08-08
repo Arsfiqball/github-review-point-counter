@@ -8,6 +8,6 @@ app
     mongoDatabase: process.env.MONGO_DATABASE || 'github-review-point-counter-test'
   })
   .then(({ server }) => {
-    server.listen(process.env.PORT || 3000);
+    server.listen(process.env.PORT || 3000)
   })
   .catch(console.error)
