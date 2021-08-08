@@ -30,6 +30,8 @@
   "dependencies": {
     "@koa/router": "^10.1.0",
     "dotenv": "^10.0.0",
-    "koa": "^2.13.1"
+    "koa": "^2.13.1",
+    "koa-bodyparser": "^4.3.0",
+    "mongodb": "^4.1.0"
   }
 }

@@ -4,7 +4,8 @@ const app = require('./src/app')
 
 app
   .start({
-    // config
+    mongoUrl: process.env.MONGO_URL || 'mongodb://localhost:27017',
+    mongoDatabase: process.env.MONGO_DATABASE || 'github-review-point-counter-test'
   })
   .then(({ server }) => {
     server.listen(process.env.PORT || 3000);
