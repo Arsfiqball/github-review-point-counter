@@ -86,7 +86,7 @@ exports.start = async function (config) {
         userLogin: commentUserLogin,
         repoName,
         repoFullname,
-        createdAt: comment.created_at
+        createdAt: new Date(comment.created_at)
       })
 
     ctx.status = 200
@@ -113,7 +113,7 @@ exports.start = async function (config) {
         userLogin: reviewUserLogin,
         repoName,
         repoFullname,
-        createdAt: review.submitted_at
+        createdAt: new Date(review.submitted_at)
       })
 
     ctx.status = 200
